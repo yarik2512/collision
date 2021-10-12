@@ -64,12 +64,11 @@ public:
         txSetFillColor(TX_BLACK);
         txSetColor(TX_BLACK);
         txRectangle(0, 0, txGetExtentX(), txGetExtentY());
-        std::vector<std::vector<bool>> checked(objs.size(), std::vector<bool>(objs.size()));
         for (int i = 0; static_cast<unsigned long long int>(i) < objs.size(); i++) {
             auto e1 = objs[static_cast<unsigned long long int>(i)];
             for (int j = i + 1; static_cast<unsigned long long int>(j) < objs.size(); j++) {
                 auto e2 = objs[static_cast<unsigned long long int>(j)];
-                if (e1 == e2 || checked[i][j]) continue;
+                if (e1 == e2) continue;
                 if (collision(e1, e2)) {
                     int x1 = e1->v.x, x2 = e2->v.x, y1 = e1->v.y, y2 = e2->v.y;
                     cout << x1 << " " << y1 << "; " << x2 << " " << y2 << std::endl;
