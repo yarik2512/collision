@@ -3,9 +3,9 @@
 
 class line {
 public:
-    int a, b, c;
-    line (int x, int y, int z) : a(x), b(y), c(z) {};
-    line (int x1, int y1, int x2, int y2)
+    double a, b, c;
+    line (double x, double y, double z) : a(x), b(y), c(z) {};
+    line (double x1, double y1, double x2, double y2)
     {
         if (x1 == x2 && y1 == y2)
         {
