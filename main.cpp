@@ -92,20 +92,6 @@ public:
             double vertDist = dist(c&vert, {x1, y1});
             double horizonDist = dist(c&horizon, {x1, y1});
             double max = dist(e1->pos, {x1, y1});
-//            cout << max << " " << vertDist << " " << horizonDist << std::endl;
-//            if (vertDist > max && horizonDist > max) return false;
-//            cout << x1 << " " << y1 << " " << e2->pos.x << " " << e2->pos.y << ": " << dist({x1, y1}, e2->pos) << ": " << std::min(vertDist, horizonDist) << ": " << r << std::endl;
-            if (dist({x1, y1}, e2->pos) <= std::min(vertDist, horizonDist) + r)
-            {
-//                cout << x1 << " " << y1 << " " << e2->pos.x << " " << e2->pos.y << std::endl;
-                cout << c.a << " " << c.b << " " << c.c << std::endl;
-//                cout << e1->pos.x << " " << e1->pos.y << " " << e1->pos.x << " " << e1->pos.y - dynamic_cast<rect *>(e1)->h << " " << e1->pos.x+dynamic_cast<rect *>(e1)->w << " " << e1->pos.y << std::endl;
-                cout << vert.a << " " << vert.b << " " << vert.c << std::endl;
-                cout << horizon.a << " " << horizon.b << " " << horizon.c << std::endl;
-                cout << (c&vert).x << " " << (c&vert).y << " " << (c&horizon).x << " " << (c&horizon).y << std::endl;
-                cout << max << " " << vertDist << " " << horizonDist << std::endl;
-//                cout << x1 << " " << y1 << " " << e2->pos.x << " " << e2->pos.y << ": " << dist({x1, y1}, e2->pos) << ": " << std::min(vertDist, horizonDist) << ": " << r << std::endl;
-            }
             return dist({x1, y1}, e2->pos) <= std::min(vertDist, horizonDist) + r;
         }
     }
