@@ -72,7 +72,7 @@ public:
     static bool collision(entity *e1, entity *e2) {
         if (!strcmp(typeid(*e1).name(), CIRC) && !strcmp(typeid(*e2).name(), CIRC)) {
             int x1 = e1->pos.x, y1 = e1->pos.y, r1 = dynamic_cast<circ *>(e1)->r, x2 = e2->pos.x, y2 = e2->pos.y, r2 = dynamic_cast<circ *>(e2)->r;
-            return vec(x2 - x1, y2 - y1).l <= (double) r1 + r2;
+            return vec(x2-x1, y2-y1).l <= (double) r1 + r2;
         }
         if (!strcmp(typeid(*e1).name(), RECT) && !strcmp(typeid(*e2).name(), RECT)) {
             return intersectX(e1, e2) && intersectY(e1, e2);
@@ -88,9 +88,10 @@ public:
             int r = dynamic_cast<circ *>(e2)->r;
             line c({x1, y1}, e2->pos);
             line vert(e1->pos, {e1->pos.x, e1->pos.y - dynamic_cast<rect *>(e1)->h});
-            line horizon(e1->pos, {e1->pos.x + dynamic_cast<rect *>(e1)->w, e1->pos.y});
-            double vertDist = dist(c & vert, {x1, y1});
-            double horizonDist = dist(c & horizon, {x1, y1});
+            line horizon(e1->pos, {e1->pos.x+dynamic_cast<rect *>(e1)->w, e1->pos.y});
+            double vertDist = dist(c&vert, {x1, y1});
+            double horizonDist = dist(c&horizon, {x1, y1});
+            double max = dist(e1->pos, {x1, y1});
             return dist({x1, y1}, e2->pos) <= std::min(vertDist, horizonDist) + r;
         }
     }
