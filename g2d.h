@@ -117,8 +117,8 @@ public:
 
 point operator&(const line &a, const line &b) {
     int A1 = a.a, B1 = a.b, C1 = a.c, A2 = b.a, B2 = b.b, C2 = b.c;
-    if (A1 * B2 == A2 * B1) return {};
-    else return {-(C1 * B2 - C2 * B1) / (A1 * B2 - A2 * B1), -(A1 * C2 - A2 * C1) / (A1 * B2 - A2 * B1)};
+    if (A1*B2 == A2*B1) return {};
+    else return {- (C1*B2 - C2*B1) / (A1*B2-A2*B1), - (A1*C2 - A2*C1) / (A1*B2-A2*B1)};
 }
 
 #endif
