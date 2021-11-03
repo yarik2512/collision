@@ -3,10 +3,8 @@
 #include <typeinfo>
 #include <cmath>
 #include "TXLib.h"
+#include "consts.h"
 #include "g2d.h"
-
-#define RECT "4rect"
-#define CIRC "4circ"
 
 class entity {
 public:
