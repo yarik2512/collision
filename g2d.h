@@ -22,6 +22,12 @@ public:
     friend vec operator-(const vec &vec1, const vec &vec2);
 
     friend int operator*(const vec &vec1, const vec &vec2);
+
+    friend double cos(vec v1, vec v2);
+
+    friend double sin(vec v1, vec v2);
+
+    bool isNull();
 };
 
 vec operator+(const vec &vec1, const vec &vec2) {
@@ -40,8 +46,12 @@ int operator*(const vec &vec1, const vec &vec2) {
     return vec1.x * vec2.x + vec1.y * vec2.y;
 }
 
+bool vec::isNull() {
+    return x == 0 && y == 0;
+}
+
 double cos(vec v1, vec v2) {
-    if (v1.l == 0 || v2.l == 0) return 0;
+    if (v1.isNull() || v2.isNull()) return 0;
     return v1 * v2 / (v1.l * v2.l);
 }
 
@@ -72,7 +82,7 @@ public:
 
     line(int x, int y, int z) : a(x), b(y), c(z) {};
 
-    line(int x1, int y1, int x2, int y2) {
+    line(int x1, int y1, int x2, int y2) : a(y2 - y1), b(x1 - x2), c((x2 - x1) * y1 - (y2 - y1) * x1) {
         if (x1 == x2 && y1 == y2) {
             a = b = c = 0;
         } else if (x1 == x2) {
@@ -83,32 +93,20 @@ public:
             a = 0;
             b = 1;
             c = -y1;
-        } else {
-            b = x2 - x1;
-            a = y2 - y1;
-            c = b * y1 - a * x1;
-            b = -b;
         }
     }
 
-    line(point p1, point p2) {
-        int x1 = p1.x, y1 = p1.y;
-        int x2 = p2.x, y2 = p2.y;
-        if (x1 == x2 && y1 == y2) {
+    line(point p1, point p2) : a(p2.y - p1.y), b(p1.x - p2.x), c((p2.x - p1.x) * p1.y - (p2.y - p1.y) * p1.x) {
+        if (p1.x == p2.x && p1.y == p2.y) {
             a = b = c = 0;
-        } else if (x1 == x2) {
+        } else if (p1.x == p2.x) {
             b = 0;
             a = 1;
-            c = -x1;
-        } else if (y1 == y2) {
+            c = -p1.x;
+        } else if (p1.y == p2.y) {
             a = 0;
             b = 1;
-            c = -y1;
-        } else {
-            b = x2 - x1;
-            a = y2 - y1;
-            c = b * y1 - a * x1;
-            b = -b;
+            c = -p1.y;
         }
     }
 
@@ -116,9 +114,9 @@ public:
 };
 
 point operator&(const line &a, const line &b) {
-    int A1 = a.a, B1 = a.b, C1 = a.c, A2 = b.a, B2 = b.b, C2 = b.c;
-    if (A1 * B2 == A2 * B1) return {};
-    else return {-(C1 * B2 - C2 * B1) / (A1 * B2 - A2 * B1), -(A1 * C2 - A2 * C1) / (A1 * B2 - A2 * B1)};
+    if (a.a * b.b == b.a * a.b) return {};
+    else
+        return {-(a.c * b.b - b.c * a.b) / (a.a * b.b - b.a * a.b), -(a.a * b.c - b.a * a.c) / (a.a * b.b - b.a * a.b)};
 }
 
 #endif

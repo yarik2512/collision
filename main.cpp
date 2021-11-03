@@ -93,6 +93,7 @@ public:
             double horizonDist = dist(c & horizon, {x1, y1});
             return dist({x1, y1}, e2->pos) <= std::min(vertDist, horizonDist) + r;
         }
+        return false;
     }
 
     void render() {
